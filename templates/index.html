@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List App</title>
+  </head>
+  <body>
+    <h1>To-Do List App</h1>
+    <form method="POST">
+      <input type="text" name="title" placeholder="Title">
+      <input type="text" name="description" placeholder="Description">
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+    {% for todo in todos %}
+      <li>
+        {{ todo.title }}
+        {% if todo.done %}
+          <strike>{{ todo.description }}</strike>
+        {% else %}
+          {{ todo.description }}
+        {% endif %}
+        <a href="{{ url_for('update', todo_id=todo.id) }}">Update</a>
+        <a href="{{ url_for('delete', todo_id=todo.id) }}">Delete</a>
+        <a href="{{ url_for('toggle', todo_id=todo.id) }}">Toggle</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
